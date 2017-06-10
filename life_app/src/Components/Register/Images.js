@@ -45,19 +45,6 @@ console.log(this.props, "being calledddd")
               }
             }
 
-      if(!this.props.url){
-          const self = this
-           s3.createPresignedPost(options, function(err, data) {
-                        if (err) {
-                          console.error('Presigning post data encountered an error', err);
-                        } else {
-                          console.log('The post data is >>>>. ', data.url);
-                          let r_ = data.url+_p
-                               self.props.urlValue(r_)
-                        }
-                      });
-      }
-
   }
 
 
@@ -65,11 +52,11 @@ console.log(this.props, "being calledddd")
 
   render(){
       if(this.props.inputValue.name){
-          this.set()
+          // this.set()
 
         return(
                <ImagesUploader
-                url={this.props.url}
+                url="http://localhost:4000/api"
                 optimisticPreviews={true}
                 onLoadEnd={(err, resp) => {
                     if(err){
