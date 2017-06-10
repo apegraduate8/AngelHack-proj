@@ -30,7 +30,7 @@ app.post('/api', (req, res) => {
 
    var options = {
               Bucket: config.S3_BUCKET,
-              Key: "anthony"
+              Key: "anthony",
               Body: req.files.imageFiles.data,
               ContentType: req.files.imageFiles.mimetype,
               ACL: 'public-read'
