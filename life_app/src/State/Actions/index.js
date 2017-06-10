@@ -31,5 +31,13 @@ export function FormValue(value){
   }
 }
 
+export function urlValue(value){
+  console.log("inside the action index.  UURRRLLLLLL >>> ",  value)
+  return {
+    type: con.UPDATE_url,
+    payload: value
+  }
+}
+
 
 

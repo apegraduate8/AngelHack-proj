@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../State/Actions';
+import DotEnv from 'dotenv';
+import aws from "aws-sdk";
 
+const DOT = DotEnv.config();
+aws.config.update({accessKeyId: DOT.AWS_ACCESS_KEY, secretAccessKey: DOT.AWS_SECRET_KEY, region: DOT.region});
 
 class Form extends Component {
 
@@ -40,11 +44,12 @@ class Form extends Component {
             name: this.form.name.value,
             birth: this.form.birth.value,
             death: this.form.death.value
-
          }
+
+
         this.props.FormValue(u)
 
-
+        console.log("props. ", this.props.inputValue)
 
 
 
@@ -57,6 +62,7 @@ class Form extends Component {
   render() {
 
         if(this.props.inputValue.name){
+          console.log(this.props)
           return(
             <div className="form">
               <h1> {this.props.inputValue.name} </h1>
