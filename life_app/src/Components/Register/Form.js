@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { InputValue } from '../../State/Actions/Index';
-import './App.css';
+import * as actionCreators from '../../State/Actions';
+
 
 class Form extends Component {
 
   constructor(props){
     super(props)
-    this.input = ""
-    this.state = {
-      nameValue: "",
 
-    }
+    this.form = {};
+
+
   }
 
 
   componentDidMount(){
-    console.log(this.state);
-  }
-  handleNameChange(e){
-     this.input = e.target.value
+    console.log(this.props);
+    // let { dispatch } = this.props
 
+  }
+  handleNameChange(){
+     // this.input = e.target.value
+
+     // this.props.nameValue(this.input)
         // this.setState(state => {
         //   state.nameValue = this.input
         // })
@@ -32,6 +34,19 @@ class Form extends Component {
 
   handleSubmit(e){
         e.preventDefault();
+        console.log(this.form)
+          let u = {...this.form,
+
+            name: this.form.name.value,
+            birth: this.form.birth.value,
+            death: this.form.death.value
+
+         }
+        this.props.FormValue(u)
+
+
+
+
 
   }
 
@@ -41,22 +56,33 @@ class Form extends Component {
 
   render() {
 
+        if(this.props.inputValue.name){
+          return(
+            <div className="form">
+              <h1> {this.props.inputValue.name} </h1>
+              <h1> {this.props.inputValue.birth} </h1>
+              <h1> {this.props.inputValue.death} </h1>
+              </div>
+
+            )
+        }
     return (
       <div className="form">
-      <form onSubmit={this.handleSubmit.bind(this)}>
+
+      <form onSubmit={this.handleSubmit.bind(this)} style={styles.form}>
         <label className="nameLabel">
-          <span> full Name:</span>
-          <input type="text" value={this.state.nameValue} onChange={ (e) => this.handleNameChange(e) } />
+
+          <input type="text" placeholder="name" ref={ e => this.form.name = e } />
         </label>
          <label className="birthLabel">
-          <span>Birth date:</span>
-          <input type="text" value={this.state.nameValue} onChange={ (e) => this.handleNameChange(e) } />
+
+          <input type="text"  ref={ e => {this.form.birth = e}} />
         </label>
          <label className="deathLabel">
-          <span>deceased date:</span>
-          <input type="text" value={this.state.nameValue} onChange={ (e) => this.handleNameChange(e) } />
+
+          <input type="text"  ref={ e => {this.form.death = e} } />
         </label>
-        <input type="submit" value="submit" style={styles}/>
+        <input type="submit" value="submit" style={styles.submit} />
       </form>
             <button onClick={() => {this.submitRequest()}} className="requestButton"> Submit registration </button>
       </div>
@@ -64,18 +90,31 @@ class Form extends Component {
   }
 }
 
-
-const mapStateToProps = function(){
-        return {
-
+const styles = {
+  form: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  submit: {
+    alignSelf: "center"
   }
+
 }
 
 const mapDispatchToProps = function(dispatch){
-      return bindActionCreators({getInput: InputValue}, dispatch)
+
+      return bindActionCreators(actionCreators, dispatch)
 }
 
-export default connect(mapDispatchToProps, mapStateToProps)(Form);
+
+const mapStateToProps = function(state){
+        return {
+              inputValue: state.inputValue
+            }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
 
 

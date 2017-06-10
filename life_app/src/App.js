@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './Components/Register/Form';
 import './App.css';
+import './Super_Form_Reset.css';
 
 class App extends Component {
   render() {
