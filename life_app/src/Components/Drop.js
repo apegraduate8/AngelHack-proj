@@ -25,13 +25,18 @@ async onDrop(acceptedFile, rejected){
           // let p = lo.split("/")
           // console.log(p[p.length -1])
           console.log("inside the ondrop ", this.props.theUser.name)
-          imageFormData.append('imageFiles', acceptedFile[0], acceptedFile[0].name);
+          let y = {...acceptedFile[0], user: this.props.theUser.name}
+          // acceptedFile[0] = this.props.theUser.name
+          imageFormData.append('imageFiles', acceptedFile[0]);
+
           // let preparedData = {
           //   name: this.props.theUser.name,
           //   imageFiles
           // }
 
-
+          const data = {
+            userName: this.props.theUser.name
+          }
 
       // let reader = new window.FileReader();
       //   reader.readAsDataURL(acceptedFile[0]);
@@ -41,8 +46,10 @@ async onDrop(acceptedFile, rejected){
       //   }
 
          try {
-              let r = await Axios.post("http://localhost:4000/api/", imageFormData)
-              console.log(r)
+              let r = await Axios.post("http://localhost:4000/api/", data)
+              let p = await Axios.post("http://localhost:4000/api/", imageFormData)
+
+              console.log(r, p)
 
 
          }catch(err){console.log(err)}

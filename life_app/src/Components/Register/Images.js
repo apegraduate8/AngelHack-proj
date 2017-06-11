@@ -65,7 +65,7 @@ console.log(this.props, "being calledddd")
                 label="Upload multiple images"
 
               />
-             <Link to={`/slideShow/${this.props.inputValue.name}`}> Submit registration </Link>
+             <Link to={`/slideShow/${this.props.inputValue.name + this.props.inputValue.birth}`}> Submit registration </Link>
               </div>
             )
       }
@@ -88,7 +88,8 @@ const mapDispatchToProps = function(dispatch){
 const mapStateToProps = function(state){
         return {
               inputValue: state.inputValue,
-               url: state.urlValue
+               url: state.urlValue,
+
             }
 }
 
