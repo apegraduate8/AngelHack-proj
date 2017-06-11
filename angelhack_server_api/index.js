@@ -45,28 +45,87 @@ app.get('/api/:id', (req, res) => {
 })
 
 app.post('/api', (req, res) => {
-if(!app.locals.images){app.locals.images = []}
+if(!app.locals.images){
+  app.locals.images = []
+  app.locals.songs = []
+}
 if(req.files){
-    console.log(req.files)
-   // var options = {
-   //            Bucket: config.S3_BUCKET,
-   //            Key: app.locals.userID+"/"+req.files.imageFiles.name,
-   //            Body: req.files.imageFiles.data,
-   //            ContentType: req.files.imageFiles.mimetype,
-   //            ACL: 'public-read'
-   //          }
-   //           console.log(req.files, "options>", options)
+    console.log("erier>>>>>> ", req.files)
+        switch(req.files.imageFiles.mimetype) {
+          case 'audio/mp3':
+            console.log("yessss", req.files.imageFiles.mimetype)
+              res.json("true")
+
+                  return true
+
+          case 'image/jpeg':
+            console.log("is a image!!!")
+                  yours()
+              return true
+          case 'image/png':
+            console.log("is a image!!!")
+                  yours()
+              return true
+          case 'image/jpg':
+            console.log("is a image!!!")
+                  yours()
+              return true
+
+    default: return true
+  }
 
 
-   //           s3.upload(options, function(err, data){
-   //                  if(err){return console.log("error in upload ", err)}
-   //                    console.log("the Location!!!!!!  >>>>>> ", data.Location)
-   //                  app.locals.images.push(data.Location)
-   //                  putData()
-   //                  res.json(data.Location)
-   //              })
+ function yours(){
+  console.log("locals. > ", app.locals.userID)
+      if(app.locals.userID){
+            let options = {
+                  Bucket: config.S3_BUCKET,
+                  Key: app.locals.userID+"/"+req.files.imageFiles.name,
+                  Body: req.files.imageFiles.data,
+                  ContentType: req.files.imageFiles.mimetype,
+                  ACL: 'public-read'
+                }
+                 console.log(req.files, "options>", options)
+                 s3.upload(options, function(err, data){
+                        if(err){return console.log("error in upload ", err)}
+                          console.log("the Location!!!!!!  >>>>>> ", data.Location)
+                        app.locals.images.push(data.Location)
+                        putData()
+                        res.json(data.Location)
+                    })
+                 return
+      }else {
+         let options = {
+                  Bucket: config.S3_BUCKET,
+                  Key: app.locals.RemName,
+                  Body: req.files.imageFiles.data,
+                  ContentType: req.files.imageFiles.mimetype,
+                  ACL: 'public-read'
+                }
+                 console.log(req.files, "options>", options)
+                 s3.upload(options, function(err, data){
+                        if(err){return console.log("error in upload ", err)}
+                          console.log("the Location!!!!!!  >>>>>> ", data.Location)
+                        app.locals.images.push(data.Location)
+                        putData()
+                        res.json(data.Location)
+                    })
+      }
+
+
+}
+
              return true
 }
+
+
+    if(req.body.userName){
+       app.locals.RemName = req.body.userName
+        console.log("yayayayay >> renname >>. ", app.locals.RemName)
+        res.json("true")
+       return
+    }
+
 
     let putRams = Object.assign({}, req.body)
     console.log(putRams)
@@ -82,7 +141,7 @@ if(req.files){
                 console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
             }else{
                 console.log("Added item:", JSON.stringify(data, null, 2));
-                app.locals.userID = putRams.name+putRams.birth
+                app.locals.userID = putRams.name+putRams.birth[0]
                 app.locals.userData = putRams
                 res.json(putRams)
             }
