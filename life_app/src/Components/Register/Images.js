@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../State/Actions';
@@ -47,6 +48,13 @@ console.log(this.props, "being calledddd")
 
   }
 
+  registerForm(e){
+      e.preventDefault()
+      console.log(this.props, "called registrationform")
+      console.log(this.history)
+
+  }
+
 
 
 
@@ -55,6 +63,7 @@ console.log(this.props, "being calledddd")
           // this.set()
 
         return(
+          <div>
                <ImagesUploader
                 url="http://localhost:4000/api"
                 optimisticPreviews={true}
@@ -68,6 +77,8 @@ console.log(this.props, "being calledddd")
                 label="Upload multiple images"
 
               />
+             <Link to={`/slideShow/${this.props.inputValue.name}`}> Submit registration </Link>
+              </div>
             )
       }
       return(

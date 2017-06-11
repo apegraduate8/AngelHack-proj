@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import Axios from 'axios';
 import * as actionCreators from '../../State/Actions';
 import DotEnv from 'dotenv';
 import aws from "aws-sdk";
@@ -36,7 +37,7 @@ class Form extends Component {
   }
 
 
-  handleSubmit(e){
+  async handleSubmit(e){
         e.preventDefault();
         console.log(this.form)
           let u = {...this.form,
@@ -45,9 +46,12 @@ class Form extends Component {
             birth: this.form.birth.value,
             death: this.form.death.value
          }
+         try {
+              let _r = await Axios.post("http://localhost:4000/api", u)
+              console.log(_r)
+              this.props.FormValue(_r.data)
 
-
-        this.props.FormValue(u)
+         }catch(err){console.log(err)}
 
         console.log("props. ", this.props.inputValue)
 
