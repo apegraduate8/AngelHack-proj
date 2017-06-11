@@ -7,8 +7,16 @@ import * as actionCreators from '../../State/Actions';
 const Show = ({ match }) => {
   console.log(match.params)
     return (
-      <div className="form">
-            <h1> yo </h1>
+      <div className="SlideContainer">
+        <div className="mid">
+              <div className="window">
+                  <h4> snippets </h4>
+              </div>
+              <h1 classNAme="Dates" style={{alignSelf: "center"}}> yo </h1>
+        </div>
+         <div className="socialMedia">
+           <h1> eeer </h1>
+          </div>
       </div>
     );
 
