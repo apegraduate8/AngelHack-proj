@@ -29,7 +29,7 @@ app.get('/api/:id', (req, res) => {
 })
 
 app.post('/api', (req, res) => {
-
+if(!app.locals.images){app.locals.images = []}
 if(req.files){
 
    var options = {
@@ -45,6 +45,8 @@ if(req.files){
              s3.upload(options, function(err, data){
                     if(err){return console.log("error in upload ", err)}
                       console.log("the Location!!!!!!  >>>>>> ", data.Location)
+                    app.locals.images.push(data.Location)
+                    putData()
                     res.json(data.Location)
                 })
              return true
@@ -65,9 +67,38 @@ if(req.files){
             }else{
                 console.log("Added item:", JSON.stringify(data, null, 2));
                 app.locals.userID = putRams.name+putRams.birth
+                app.locals.userData = putRams
                 res.json(putRams)
             }
   })
+
+function putData() {
+
+    let pararams = {
+            TableName: "donators",
+            Key:{
+                "name": app.locals.userData.name
+            },
+            UpdateExpression: "set images = :r",
+            ExpressionAttributeValues:{
+                ":r": app.locals.images
+            },
+            ReturnValues:"UPDATED_NEW"
+        };
+
+      console.log("Updating the item...");
+  docClient.update(pararams, function(err, data) {
+            if(err){
+                console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+            }else{
+                console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+            }
+        });
+
+
+
+  }
+
 
 })
 
