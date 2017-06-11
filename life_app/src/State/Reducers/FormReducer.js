@@ -1,4 +1,4 @@
-import { UPDATE_nameInput, UPDATE_birthInput, UPDATE_deathInput,  UPDATE_Form  } from '../Actions/constants'
+import { UPDATE_Form  } from '../Actions/constants'
 
 
 export default function(state = {} , action){

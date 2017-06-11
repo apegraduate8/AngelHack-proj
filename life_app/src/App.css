@@ -116,7 +116,17 @@ p {
   display: flex;
   flex-direction: column;
 }
+/*  social icons */
 .socialMedia {
   width: 10%;
   margin-left: 20px;
 }
+.icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.SocialMediaShareButton {
+  margin: 10%;
+}
+/*  social icons */

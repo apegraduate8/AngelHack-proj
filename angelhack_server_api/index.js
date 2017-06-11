@@ -23,32 +23,48 @@ app.get('/api', (req, res) => {
 
   console.log("server called ", req.body)
 })
-app.get('/api/:id', (req, res) => {
 
-  console.log("server called with params", req.body, req.params)
+app.get('/api/:id', (req, res) => {
+  console.log("server called to get specific profile with params >>  ", req.body, req.params)
+    let profileParams = {
+                TableName: "donators",
+                Key:{
+                    "name": req.params
+                }
+            };
+
+   docClient.get(profileParams, function(err, data) {
+            if (err) {
+                console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            } else {
+                console.log("GetItem succeeded:", data,  JSON.stringify(data, null, 2));
+            }
+        });
+
+
 })
 
 app.post('/api', (req, res) => {
 if(!app.locals.images){app.locals.images = []}
 if(req.files){
+    console.log(req.files)
+   // var options = {
+   //            Bucket: config.S3_BUCKET,
+   //            Key: app.locals.userID+"/"+req.files.imageFiles.name,
+   //            Body: req.files.imageFiles.data,
+   //            ContentType: req.files.imageFiles.mimetype,
+   //            ACL: 'public-read'
+   //          }
+   //           console.log(req.files, "options>", options)
 
-   var options = {
-              Bucket: config.S3_BUCKET,
-              Key: app.locals.userID+"/"+req.files.imageFiles.name,
-              Body: req.files.imageFiles.data,
-              ContentType: req.files.imageFiles.mimetype,
-              ACL: 'public-read'
-            }
-             console.log(req.files, "options>", options)
 
-
-             s3.upload(options, function(err, data){
-                    if(err){return console.log("error in upload ", err)}
-                      console.log("the Location!!!!!!  >>>>>> ", data.Location)
-                    app.locals.images.push(data.Location)
-                    putData()
-                    res.json(data.Location)
-                })
+   //           s3.upload(options, function(err, data){
+   //                  if(err){return console.log("error in upload ", err)}
+   //                    console.log("the Location!!!!!!  >>>>>> ", data.Location)
+   //                  app.locals.images.push(data.Location)
+   //                  putData()
+   //                  res.json(data.Location)
+   //              })
              return true
 }
 

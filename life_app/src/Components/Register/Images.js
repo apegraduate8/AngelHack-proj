@@ -36,17 +36,6 @@ console.log(this.props, "being calledddd")
 
   }
 
-  set(){
-     console.log("called in image", this.props)
-      let _p = `/${this.props.inputValue.name}/${this.props.inputValue.birth}`
-    var options = {
-              Bucket: config.S3_BUCKET,
-              Field: {
-                Key: _p
-              }
-            }
-
-  }
 
   registerForm(e){
       e.preventDefault()
@@ -60,7 +49,6 @@ console.log(this.props, "being calledddd")
 
   render(){
       if(this.props.inputValue.name){
-          // this.set()
 
         return(
           <div>
