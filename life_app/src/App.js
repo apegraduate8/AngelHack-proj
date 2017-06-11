@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Form from './Components/Register/Form';
+import Images from './Components/Register/Images';
 import './App.css';
+import './Super_Form_Reset.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <div className="leftMain">
+
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+         <div className="rightMain">
+         <Form />
+         <Images />
+        </div>
       </div>
     );
   }
