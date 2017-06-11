@@ -4,3 +4,5 @@ export const UPDATE_birthInput = 'birthInputValue';
 export const UPDATE_deathInput = 'deathInputValue';
 export const UPDATE_Form = 'FormValue';
 export const UPDATE_url = 'urlValue';
+export const UserInfo = 'userINFO';
+export const UserSong = 'userSONG';

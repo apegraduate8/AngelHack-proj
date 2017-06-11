@@ -39,5 +39,20 @@ export function urlValue(value){
   }
 }
 
+export function Userinfo(value){
+  console.log("inside the action index.  UURRRLLLLLL >>> ",  value)
+  return {
+    type: con.UserInfo,
+    payload: value
+  }
+}
+
+export function UserSong(value){
+  console.log("inside the action index.  UURRRLLLLLL >>> ",  value)
+  return {
+    type: con.UserSong,
+    payload: value
+  }
+}
 
 
