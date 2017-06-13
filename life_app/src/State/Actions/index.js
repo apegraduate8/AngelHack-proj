@@ -55,4 +55,29 @@ export function UserSong(value){
   }
 }
 
+export function UserImages(value){
+  console.log("inside the action index. USERRR IMAGEs >>> ",  value)
+  return {
+    type: con.UserImages,
+    payload: value
+  }
+}
+
+export function CurrentUserImage(value){
+  console.log("inside the action index.  current IMAGE >>> ",  value)
+  return {
+    type: con.UsercurrentImage,
+    payload: value
+  }
+}
+export function UserImageCount(val){
+  console.log("inside the action index.  IMAGE change UserImageCount>>> ",  val)
+  return {
+    type: con.ImageCount,
+    payload: val
+  }
+}
+
+
+
 

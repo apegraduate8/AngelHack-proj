@@ -5,6 +5,7 @@ const aws = require('aws-sdk');
 const corsPrefetch = require('cors-prefetch-middleware').default;
 const fileUpload = require('express-fileupload');
 const config = require('../life_app/src/Config.js');
+const Anthony = require('./Anthony.js');
 
 app.use(fileUpload());
 app.use(corsPrefetch);
@@ -26,10 +27,27 @@ app.get('/api', (req, res) => {
 
 app.get('/api/:id', (req, res) => {
   console.log("server called to get specific profile with params >>  ", req.body, req.params)
+    // let r = req.params.id.split(" ")
+
+    // let j = r.length-1;
+    // let p = r[j];
+    // let d = p.split("");
+    // d.pop();
+    // console.log(parseInt(d[d.length-1]))
+    // if( !Number.isNaN(Number(d[d.length-1])) ){
+    //     d.pop()
+    //      console.log("d again", d)
+    // }
+    // let y = d.join("");
+    // let final = r[0] + " " + y;
+    let final = Anthony.getName(req.params);
+
+    console.log("final ", final)
+
     let profileParams = {
                 TableName: "donators",
                 Key:{
-                    "name": req.params
+                    "name": final
                 }
             };
 
@@ -38,6 +56,7 @@ app.get('/api/:id', (req, res) => {
                 console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             } else {
                 console.log("GetItem succeeded:", data,  JSON.stringify(data, null, 2));
+                res.json(data)
             }
         });
 
@@ -47,20 +66,21 @@ app.get('/api/:id', (req, res) => {
 app.post('/api', (req, res) => {
 if(!app.locals.images){
   app.locals.images = []
-  app.locals.songs = []
+  app.locals.audio = null
 }
 if(req.files){
     console.log("erier>>>>>> ", req.files)
         switch(req.files.imageFiles.mimetype) {
           case 'audio/mp3':
             console.log("yessss", req.files.imageFiles.mimetype)
-              res.json("true")
+              // res.json("true")
+                  yours()
 
                   return true
 
           case 'image/jpeg':
             console.log("is a image!!!")
-                  yours()
+
               return true
           case 'image/png':
             console.log("is a image!!!")
@@ -106,8 +126,9 @@ if(req.files){
                  s3.upload(options, function(err, data){
                         if(err){return console.log("error in upload ", err)}
                           console.log("the Location!!!!!!  >>>>>> ", data.Location)
-                        app.locals.images.push(data.Location)
-                        putData()
+                        // app.locals.images.push(data.Location)
+                        app.locals.audio = data.Location
+                        putData("audio")
                         res.json(data.Location)
                     })
       }
@@ -128,7 +149,7 @@ if(req.files){
 
 
     let putRams = Object.assign({}, req.body)
-    console.log(putRams)
+    console.log("putrams.  >>> ", putRams)
 
     let option = {
        TableName: "donators",
@@ -147,9 +168,35 @@ if(req.files){
             }
   })
 
-function putData() {
+function putData(a) {
+  let pararams;
 
-    let pararams = {
+  if(a === "audio"){
+      pararams = {
+            TableName: "donators",
+            Key:{
+                "name": app.locals.RemName
+            },
+            UpdateExpression: "set audioFiles = :r",
+            ExpressionAttributeValues:{
+                ":r": app.locals.audio
+            },
+            ReturnValues:"UPDATED_NEW"
+        };
+
+      console.log("Updating the item...");
+      docClient.update(pararams, function(err, data) {
+            if(err){
+                console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+            }else{
+                console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+            }
+        });
+
+        return true
+  }
+
+   pararams = {
             TableName: "donators",
             Key:{
                 "name": app.locals.userData.name
@@ -162,7 +209,7 @@ function putData() {
         };
 
       console.log("Updating the item...");
-  docClient.update(pararams, function(err, data) {
+      docClient.update(pararams, function(err, data) {
             if(err){
                 console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
             }else{
@@ -183,3 +230,7 @@ function putData() {
 app.listen(4000, () => {
   console.log("server running on pt 4000")
 })
+
+
+
+/// https://react-dropzone.netlify.com/

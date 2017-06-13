@@ -24,8 +24,8 @@ async onDrop(acceptedFile, rejected){
           // let lo =  window.location.href
           // let p = lo.split("/")
           // console.log(p[p.length -1])
-          console.log("inside the ondrop ", this.props.theUser.name)
-          let y = {...acceptedFile[0], user: this.props.theUser.name}
+          console.log("inside the ondrop ", this.props.user.name)
+          let y = {...acceptedFile[0], user: this.props.user.name}
           // acceptedFile[0] = this.props.theUser.name
           imageFormData.append('imageFiles', acceptedFile[0]);
 
@@ -35,7 +35,7 @@ async onDrop(acceptedFile, rejected){
           // }
 
           const data = {
-            userName: this.props.theUser.name
+            userName: this.props.user.name
           }
 
       // let reader = new window.FileReader();
@@ -66,6 +66,7 @@ async onDrop(acceptedFile, rejected){
 
   render(){
       console.log(this.props.usersongs)
+      console.log(this.props.user)
     if(this.props.usersongs === null){
       return(
                 <div>

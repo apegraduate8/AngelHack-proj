@@ -59,19 +59,15 @@ class Form extends Component {
 
   }
 
-  submitRequest(e){
-
-  }
-
   render() {
 
         if(this.props.inputValue.name){
           console.log(this.props)
           return(
             <div className="form2">
-              <h1> {this.props.inputValue.name} </h1>
-              <h1> {this.props.inputValue.birth} </h1>
-              <h1> {this.props.inputValue.death} </h1>
+              <h1 className="row h2s"> {this.props.inputValue.name} </h1>
+              <h1 className="row h2s"> {this.props.inputValue.birth} </h1>
+              <h1 className="row h2s"> {this.props.inputValue.death} </h1>
               </div>
 
             )

@@ -18,7 +18,10 @@
     margin-right: 150px;
 }
 .rightMain {
-    width: 60%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 150px;
 }
 
 .App-logo {
@@ -60,7 +63,7 @@ input {
     flex-direction: column;
 }
 .row {
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 @keyframes App-logo-spin {
@@ -99,8 +102,8 @@ p {
 }
 
 .window {
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 95%;
   margin: 10px auto;
   border: 1px solid black;
   -moz-box-shadow:    inset 0 0 10px #000000;
@@ -109,11 +112,11 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .mid {
-   width: 80%;
+  width: 80%;
   height: 90%;
   display: flex;
   flex-direction: column;
@@ -127,8 +130,25 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
+
 .SocialMediaShareButton {
   margin: 10%;
+  cursor: pointer;
+}
+.SocialMediaShareButton:hover {
+
+}
+
+.social-icon {
+      transition: all .3s;
+}
+
+.social-icon:hover {
+      width: 55px;
+      height: 55px;
 }
 /*  social icons */
+
+

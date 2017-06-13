@@ -12,7 +12,7 @@ class App extends Component {
           <div className="logo"> </div>
           <div className="snippet">
 
-              <p>Once you complete the form, you will be directed to the "place of reflection". At any time you may add a photo to the gallery or song to the playlist. Feel free to share this memorial page so others can add to this persons legacy <br />
+              <p style={{fontSize: "25px"}}>Once you complete the form, you will be directed to the "place of reflection". At any time you may add a photo to the gallery or song to the playlist. Feel free to share this memorial page so others can add to this persons legacy <br />
                   "Sorry for your lost" <br/>
                   "they will always be remembered"
               </p>

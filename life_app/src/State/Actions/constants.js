@@ -6,3 +6,6 @@ export const UPDATE_Form = 'FormValue';
 export const UPDATE_url = 'urlValue';
 export const UserInfo = 'userINFO';
 export const UserSong = 'userSONG';
+export const UserImages = 'userIMAGES';
+export const UsercurrentImage = 'userCurrentImage';
+export const ImageCount = 'Count';

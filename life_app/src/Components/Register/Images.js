@@ -8,11 +8,9 @@ import 'react-images-uploader/styles.css';
 import 'react-images-uploader/font.css';
 import config from '../../Config';
 
-import aws from "aws-sdk";
 
 
-aws.config.update({accessKeyId: config.AWS_ACCESS_KEY, secretAccessKey: config.AWS_SECRET_KEY, region: config.region});
-let s3 = new aws.S3();
+
 class Images extends Component {
 
   componentDidMount(){
@@ -65,18 +63,33 @@ console.log(this.props, "being calledddd")
                 label="Upload multiple images"
 
               />
-             <Link to={`/slideShow/${this.props.inputValue.name + this.props.inputValue.birth}`}> Submit registration </Link>
+             <Link to={`/slideShow/${this.props.inputValue.name + this.props.inputValue.birth}`} style={styles.button}> Submit registration </Link>
               </div>
             )
       }
       return(
-          <h3> submit the required fields before image upload </h3>
+          <h3 style={{ alignSelf: "baseline", marginLeft: "14%", marginTop: "10%", fontSize: "15px" }}> submit the required fields before image upload </h3>
         )
 
 
   }
 
 
+}
+
+const styles = {
+  button: {
+    borderRadius: "4px",
+    padding: "10px 16px",
+    fontSize: "18px",
+    lineHeight: "1.33",
+    width: "100%",
+    backgroundColor: "rgba(158, 88, 159, 0.67)",
+    backgroundImage: "linear-gradient(left bottom, rgba(159,88,150,0) 0,rgba(159,88,150,0.6) 100%)",
+    margin: "2px",
+    color: "black",
+    textDecoration: "none"
+  }
 }
 
 
