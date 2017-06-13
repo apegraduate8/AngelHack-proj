@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
 const corsPrefetch = require('cors-prefetch-middleware').default;
 const fileUpload = require('express-fileupload');
-const config = require('../life_app/src/Config.js');
+const config = require('./Config.js');
 const Anthony = require('./Anthony.js');
 
 app.use(fileUpload());
