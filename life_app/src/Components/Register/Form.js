@@ -47,7 +47,8 @@ class Form extends Component {
             death: this.form.death.value
          }
          try {
-              let _r = await Axios.post("http://localhost:4000/api", u)
+              // let _r = await Axios.post("http://localhost:4000/api", u)
+              let _r = await Axios.post("http://lifeagainserv.us-east-1.elasticbeanstalk.com/ap", u)
               console.log(_r)
               this.props.FormValue(_r.data)
 

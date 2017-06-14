@@ -61,7 +61,7 @@ class Show extends Component {
 
  async get(params){
      try {
-            let _r = await Axios.get("http://localhost:4000/api/"+params)
+            let _r = await Axios.get("http://lifey.us-east-1.elasticbeanstalk.com/api/"+params)
             console.log(_r.data.Item)
             this.props.Userinfo(_r.data.Item)
             // this.props.UserImages(_r.data.Item.images)

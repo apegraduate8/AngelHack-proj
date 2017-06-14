@@ -51,7 +51,7 @@ console.log(this.props, "being calledddd")
         return(
           <div>
                <ImagesUploader
-                url="http://localhost:4000/api"
+                url="http://lifeagainserv.us-east-1.elasticbeanstalk.com/api"
                 optimisticPreviews={true}
                 onLoadEnd={(err, resp) => {
                     if(err){
